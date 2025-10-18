@@ -1,8 +1,11 @@
 package com.cloudeagle.dropbox_demo.oauthprovider;
 
-import com.cloudeagle.dropbox_demo.model.Token;
+import com.cloudeagle.dropbox_demo.model.OAuthCredentials;
 import com.dropbox.core.DbxException;
 
 public interface OAuthProvider {
-  Token exchangeCodeForToken(String provider, String code) throws DbxException;
+  OAuthCredentials exchangeCodeForToken(String code) throws DbxException;
+
+  OAuthCredentials refreshOauthCredentials(String oldAccessToken, String refreshToken)
+      throws DbxException;
 }

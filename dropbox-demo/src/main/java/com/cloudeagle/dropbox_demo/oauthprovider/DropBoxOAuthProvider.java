@@ -1,7 +1,9 @@
 package com.cloudeagle.dropbox_demo.oauthprovider;
 
-import com.cloudeagle.dropbox_demo.model.Token;
+import com.cloudeagle.dropbox_demo.model.OAuthCredentials;
 import com.dropbox.core.*;
+import com.dropbox.core.oauth.DbxCredential;
+import java.time.Duration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +23,7 @@ public class DropBoxOAuthProvider implements OAuthProvider {
   }
 
   @Override
-  public Token exchangeCodeForToken(String provider, String code) throws DbxException {
+  public OAuthCredentials exchangeCodeForToken(String code) throws DbxException {
     DbxRequestConfig config = DbxRequestConfig.newBuilder("cloudEagleApp").build();
     DbxAppInfo appInfo = new DbxAppInfo(clientId, clientSecret);
     DbxWebAuth webAuth = new DbxWebAuth(config, appInfo);
@@ -30,10 +32,41 @@ public class DropBoxOAuthProvider implements OAuthProvider {
 
     String accessToken = authFinish.getAccessToken();
     String refreshToken = authFinish.getRefreshToken();
-    long expiryTimestamp = System.currentTimeMillis() + (authFinish.getExpiresAt() * 1000);
+    long expiryTimestamp =
+        Duration.ofMillis(System.currentTimeMillis())
+            .plusSeconds(authFinish.getExpiresAt())
+            .toMillis();
 
-    return Token.builder()
+    return OAuthCredentials.builder()
         .accessToken(accessToken)
+        .refreshToken(refreshToken)
+        .accessTokenExpiryTime(expiryTimestamp)
+        .build();
+  }
+
+  @Override
+  public OAuthCredentials refreshOauthCredentials(String oldAccessToken, String refreshToken)
+      throws DbxException {
+
+    DbxCredential dbxCredential =
+        new DbxCredential(
+            oldAccessToken,
+            -1L, // expiration time (optional)
+            refreshToken,
+            clientId,
+            clientSecret);
+
+    DbxRequestConfig dbxRequestConfig = DbxRequestConfig.newBuilder("cloudEagleApp").build();
+
+    dbxCredential.refresh(dbxRequestConfig);
+
+    long expiryTimestamp =
+        Duration.ofMillis(System.currentTimeMillis())
+            .plusSeconds(dbxCredential.getExpiresAt())
+            .toMillis();
+
+    return OAuthCredentials.builder()
+        .accessToken(dbxCredential.getAccessToken())
         .refreshToken(refreshToken)
         .accessTokenExpiryTime(expiryTimestamp)
         .build();

@@ -3,9 +3,11 @@ package com.cloudeagle.dropbox_demo.controller;
 import com.cloudeagle.dropbox_demo.oauthprovider.OAuthProviderRegistry;
 import com.cloudeagle.dropbox_demo.tokenstore.TokenStore;
 import com.dropbox.core.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
-@RestController
+@Controller
 @RequestMapping("/{provider}/oauth/callback")
 public class OAuthCallBackController {
   private final TokenStore tokenStore;
@@ -17,17 +19,15 @@ public class OAuthCallBackController {
   }
 
   @GetMapping
-  public String oAuthCallback(@PathVariable String provider, @RequestParam String code)
+  public RedirectView oAuthCallback(@PathVariable String provider, @RequestParam String code)
       throws DbxException {
 
     var token =
-        oAuthProviderRegistry
-            .getOAuthProvider(provider)
-            .exchangeCodeForToken(provider, code);
+        oAuthProviderRegistry.getOAuthProvider(provider).exchangeCodeForToken(provider, code);
 
     // NOTE: userid is hardcoded here for simplicity
     tokenStore.saveToken(provider, "rahul", token);
 
-    return "Authentication successful!";
+    return new RedirectView("/");
   }
 }

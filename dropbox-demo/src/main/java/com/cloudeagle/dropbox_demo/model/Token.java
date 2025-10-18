@@ -1,4 +1,4 @@
-package com.cloudeagle.dropbox_demo.tokenstore;
+package com.cloudeagle.dropbox_demo.model;
 
 import lombok.Builder;
 import lombok.Data;

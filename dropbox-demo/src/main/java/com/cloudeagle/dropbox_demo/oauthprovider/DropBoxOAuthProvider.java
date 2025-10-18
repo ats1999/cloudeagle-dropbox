@@ -1,6 +1,6 @@
 package com.cloudeagle.dropbox_demo.oauthprovider;
 
-import com.cloudeagle.dropbox_demo.tokenstore.Token;
+import com.cloudeagle.dropbox_demo.model.Token;
 import com.dropbox.core.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

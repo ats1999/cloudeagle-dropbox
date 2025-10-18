@@ -1,5 +1,7 @@
 package com.cloudeagle.dropbox_demo.tokenstore;
 
+import com.cloudeagle.dropbox_demo.model.Token;
+
 import java.util.Optional;
 
 public interface TokenStore {

@@ -8,20 +8,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class InMemoryOAuthCredentialStore implements OAuthCredentialStore {
-  private final ConcurrentHashMap<String, ConcurrentHashMap<String, OAuthCredentials>> tokenStore;
+  private final ConcurrentHashMap<String, ConcurrentHashMap<String, OAuthCredentials>> credentialStore;
 
   InMemoryOAuthCredentialStore() {
-    this.tokenStore = new ConcurrentHashMap<>();
+    this.credentialStore = new ConcurrentHashMap<>();
   }
 
   @Override
   public void saveToken(String provider, String tenantId, OAuthCredentials OAuthCredentials) {
-    tokenStore.computeIfAbsent(provider, k -> new ConcurrentHashMap<>()).put(tenantId, OAuthCredentials);
+    credentialStore.computeIfAbsent(provider, k -> new ConcurrentHashMap<>()).put(tenantId, OAuthCredentials);
   }
 
   @Override
   public Optional<OAuthCredentials> getToken(String provider, String tenantId) {
-    var providerStore = tokenStore.get(provider);
+    var providerStore = credentialStore.get(provider);
     if (providerStore == null) {
       return Optional.empty();
     }

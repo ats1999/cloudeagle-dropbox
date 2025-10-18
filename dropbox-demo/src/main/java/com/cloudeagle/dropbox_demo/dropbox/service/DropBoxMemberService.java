@@ -1,7 +1,7 @@
 package com.cloudeagle.dropbox_demo.dropbox.service;
 
-import com.dropbox.core.v2.team.MembersListResult;
+import com.cloudeagle.dropbox_demo.dropbox.dto.MembersListDTO;
 
 public interface DropBoxMemberService {
-    MembersListResult fetchMemberList(String tenantId, String cursor) throws Exception;
+    MembersListDTO fetchMemberList(String tenantId, String cursor) throws Exception;
 }

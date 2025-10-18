@@ -63,7 +63,7 @@ public class DropBoxMemberServiceImpl implements DropBoxMemberService {
                   return MemberDTO.builder()
                       .accountId(profile.getAccountId())
                       .email(profile.getEmail())
-                      .status(profile.getStatus().toString())
+                      .status(profile.getStatus().tag().toString())
                       .displayName(profile.getName().getDisplayName())
                       .build();
                 })

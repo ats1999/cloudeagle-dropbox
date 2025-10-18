@@ -31,6 +31,11 @@ You'll be taken to dropbox oauth page, when you click on that button. After auth
 
 `/dropbox/members/list` have implemented list members API, it'll fetch members of any team/org and show them.
 
+
+
+https://github.com/user-attachments/assets/57204a42-721f-476a-ad05-1bc64cde6e7f
+
+
 ## UML Diagram
 
 <img width="1325" height="1108" alt="dropbox-demo drawio" src="https://github.com/user-attachments/assets/7587c907-694d-41f8-a9b8-56a51a48843b" />

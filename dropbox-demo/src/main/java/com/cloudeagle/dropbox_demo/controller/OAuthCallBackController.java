@@ -1,4 +1,4 @@
-package com.cloudeagle.dropbox_demo;
+package com.cloudeagle.dropbox_demo.controller;
 
 import com.cloudeagle.dropbox_demo.oauthprovider.OAuthProviderRegistry;
 import com.cloudeagle.dropbox_demo.tokenstore.TokenStore;
@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/{provider}/oauth/callback")
-public class OAuthCallBack {
+public class OAuthCallBackController {
   private final TokenStore tokenStore;
   private final OAuthProviderRegistry oAuthProviderRegistry;
 
-  OAuthCallBack(TokenStore tokenStore, OAuthProviderRegistry oAuthProviderRegistry) {
+  OAuthCallBackController(TokenStore tokenStore, OAuthProviderRegistry oAuthProviderRegistry) {
     this.tokenStore = tokenStore;
     this.oAuthProviderRegistry = oAuthProviderRegistry;
   }

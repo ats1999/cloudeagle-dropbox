@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dropbox OAuth Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        a.button {
+            display: inline-block;
+            background-color: #007ee5;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        a.button:hover {
+            background-color: #005bb5;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Dropbox OAuth2 Demo</h1>
+<p>Click the button to authorize with Dropbox</p>
+
+<!-- Replace <YOUR_CLIENT_ID> and <YOUR_REDIRECT_URI> -->
+<a
+    class="button"
+    href="https://www.dropbox.com/oauth2/authorize?client_id=k5vgfxdhjmkauy0&response_type=code&redirect_uri=http://localhost:8080/dropbox/oauth/callback&token_access_type=offline&scope=members.read"
+>
+    Authorize with Dropbox
+</a>
+
+</body>
+</html>

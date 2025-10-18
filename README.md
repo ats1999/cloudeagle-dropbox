@@ -33,8 +33,7 @@ You'll be taken to dropbox oauth page, when you click on that button. After auth
 
 
 
-https://github.com/user-attachments/assets/57204a42-721f-476a-ad05-1bc64cde6e7f
-
+https://github.com/user-attachments/assets/6f35ebe0-7f7e-40ae-8a06-f5fa8df25724
 
 ## UML Diagram
 
